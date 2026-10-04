@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Obsidian Atelier — Fine Woodworking & Custom Cabinetry</title>
+<meta name="description" content="Futuristic luxury custom kitchen and entryway cabinetry. From blueprint to reality." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          obsidian: { 950: '#030508', 900: '#06090f', 800: '#0b111a', 700: '#121a26' },
+          neon: { cyan: '#22e6ff', blue: '#3b82ff', violet: '#8b5cf6' }
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          sans: ['Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace']
+        }
+      }
+    }
+  };
+</script>
+<style>
+  :root { --cyan: #22e6ff; --blue: #3b82ff; }
+  html { scroll-behavior: smooth; }
+  body { background: #030508; color: #e6edf5; overflow-x: hidden; }
+  .glass { background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(255,255,255,.08); }
+  .glow-text { background: linear-gradient(92deg, #fff 0%, #bff6ff 40%, #22e6ff 70%, #3b82ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grid-bg { background-image: linear-gradient(rgba(34,230,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(34,230,255,.05) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%); }
+  .orb { position: absolute; border-radius: 9999px; filter: blur(90px); opacity: .35; pointer-events: none; }
+  .btn-neon { position: relative; background: linear-gradient(92deg, #22e6ff, #3b82ff); color: #031018; box-shadow: 0 0 0 1px rgba(34,230,255,.4), 0 10px 40px -10px rgba(34,230,255,.7); transition: transform .25s, box-shadow .25s; }
+  .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(34,230,255,.7), 0 18px 50px -10px rgba(34,230,255,.9); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.14); transition: border-color .25s, background .25s; }
+  .btn-ghost:hover { border-color: rgba(34,230,255,.6); background: rgba(34,230,255,.06); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Stage viewer */
+  .stage-layer { position: absolute; inset: 0; transition: opacity .15s linear; }
+  .stage-layer svg, .stage-layer img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stage-tab[aria-selected="true"] { color: #031018; background: linear-gradient(92deg, #22e6ff, #3b82ff); }
+  .scanline { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); box-shadow: 0 0 18px var(--cyan); animation: scan 4s ease-in-out infinite; opacity: .7; }
+  @keyframes scan { 0%,100% { top: 4%; } 50% { top: 94%; } }
+
+  input[type=range].scrub { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 4px; background: linear-gradient(90deg, #22e6ff var(--p,0%), rgba(255,255,255,.12) var(--p,0%)); outline: none; }
+  input[type=range].scrub::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #031018; border: 2px solid #22e6ff; box-shadow: 0 0 16px #22e6ff; cursor: grab; }
+  input[type=range].scrub::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #031018; border: 2px solid #22e6ff; box-shadow: 0 0 16px #22e6ff; cursor: grab; }
+
+  /* SVG animations */
+  .draw { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 3.2s ease forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .laser { stroke-dasharray: 6 8; animation: march 1.2s linear infinite; }
+  @keyframes march { to { stroke-dashoffset: -28; } }
+  .pulse { animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+
+  /* Feature cards */
+  .feature { transition: transform .4s cubic-bezier(.2,.7,.2,1), border-color .4s; }
+  .feature:hover { transform: translateY(-6px); border-color: rgba(34,230,255,.35); }
+  .feature .halo { opacity: 0; transition: opacity .4s; background: radial-gradient(400px circle at var(--mx,50%) var(--my,50%), rgba(34,230,255,.14), transparent 40%); }
+  .feature:hover .halo { opacity: 1; }
+
+  /* Compare slider */
+  .compare { position: relative; overflow: hidden; touch-action: pan-y; cursor: ew-resize; }
+  .compare .after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--split,50%)); }
+  .compare .handle { position: absolute; top: 0; bottom: 0; left: var(--split,50%); width: 2px; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); transform: translateX(-1px); }
+  .compare .handle::after { content: '⟷'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; color: #031018; background: var(--cyan); box-shadow: 0 0 20px var(--cyan); }
+
+  /* Form */
+  .field { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); transition: border-color .25s, box-shadow .25s, background .25s; }
+  .field:focus { outline: none; border-color: rgba(34,230,255,.7); box-shadow: 0 0 0 4px rgba(34,230,255,.12); background: rgba(255,255,255,.05); }
+  .field.invalid { border-color: rgba(255,92,122,.8); box-shadow: 0 0 0 4px rgba(255,92,122,.1); }
+  .ptype input:checked + label { border-color: rgba(34,230,255,.8); background: rgba(34,230,255,.08); color: #fff; box-shadow: inset 0 0 0 1px rgba(34,230,255,.4), 0 0 30px -10px rgba(34,230,255,.8); }
+  .spinner { width: 18px; height: 18px; border: 2px solid rgba(3,16,24,.3); border-top-color: #031018; border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .draw { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- NAV -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mt-4 glass rounded-2xl flex items-center justify-between px-4 sm:px-6 h-16">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="relative grid place-items-center w-9 h-9 rounded-lg border border-cyan-300/40 bg-cyan-300/5">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="#22e6ff" stroke-width="1.6"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><path d="M9 11v2M15 7h2M15 17h2"/></svg>
+        </span>
+        <span class="font-display font-semibold tracking-wide">OBSIDIAN<span class="text-neon-cyan"> ATELIER</span></span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+        <a href="#process" class="hover:text-white transition">Process</a>
+        <a href="#features" class="hover:text-white transition">Smart Features</a>
+        <a href="#gallery" class="hover:text-white transition">Transformations</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
+      </nav>
+      <a href="#contact" class="hidden sm:inline-flex btn-neon rounded-xl px-4 py-2 text-sm font-semibold">Start a Project</a>
+      <button id="menuBtn" class="md:hidden p-2 rounded-lg btn-ghost" aria-label="Open menu" aria-expanded="false">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden mt-2 glass rounded-2xl p-4">
+      <nav class="flex flex-col gap-3 text-slate-200">
+        <a href="#process">Process</a><a href="#features">Smart Features</a><a href="#gallery">Transformations</a><a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="relative min-h-screen pt-32 pb-20 overflow-hidden">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="orb w-[520px] h-[520px] bg-cyan-400 -top-40 -left-40"></div>
+  <div class="orb w-[460px] h-[460px] bg-blue-600 top-1/3 -right-40"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-5 reveal">
+      <div class="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs font-mono text-cyan-200">
+        <span class="w-1.5 h-1.5 rounded-full bg-neon-cyan pulse"></span> PRECISION CABINETRY · EST. STUDIO
+      </div>
+      <h1 class="mt-6 font-display text-5xl sm:text-6xl xl:text-7xl font-semibold leading-[1.02] tracking-tight">
+        Fine Woodworking<span class="text-slate-600">.</span><br/><span class="glow-text">Custom Cabinetry.</span>
+      </h1>
+      <p class="mt-6 text-lg text-slate-400 max-w-lg leading-relaxed">
+        Bespoke kitchen suites and entry systems, engineered in CAD to sub-millimetre tolerance and built from dark oak, brushed titanium and honed quartz.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#contact" class="btn-neon rounded-xl px-6 py-3.5 font-semibold">Book a Design Consult</a>
+        <a href="#gallery" class="btn-ghost rounded-xl px-6 py-3.5 font-medium">View Transformations</a>
+      </div>
+      <dl class="mt-12 grid grid-cols-3 gap-4 max-w-md">
+        <div><dt class="text-xs text-slate-500 font-mono">TOLERANCE</dt><dd class="font-display text-2xl mt-1">±0.3<span class="text-sm text-slate-500">mm</span></dd></div>
+        <div><dt class="text-xs text-slate-500 font-mono">BUILDS</dt><dd class="font-display text-2xl mt-1" data-count="480">0</dd></div>
+        <div><dt class="text-xs text-slate-500 font-mono">WARRANTY</dt><dd class="font-display text-2xl mt-1">25<span class="text-sm text-slate-500">yr</span></dd></div>
+      </dl>
+    </div>
+
+    <!-- Blueprint-to-Reality viewer -->
+    <div id="process" class="lg:col-span-7 reveal scroll-mt-28">
+      <div class="glass rounded-3xl p-3 sm:p-4 shadow-[0_40px_120px_-40px_rgba(34,230,255,.45)]">
+        <div class="flex items-center justify-between px-2 pb-3">
+          <div class="flex items-center gap-2 font-mono text-[11px] text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-red-400/70"></span><span class="w-2 h-2 rounded-full bg-amber-300/70"></span><span class="w-2 h-2 rounded-full bg-emerald-400/70"></span>
+            <span class="ml-2 hidden sm:inline">BLUEPRINT→REALITY // PROJECT_0427.dwg</span>
+          </div>
+          <span id="stageReadout" class="font-mono text-[11px] text-neon-cyan">STAGE 01 · BLUEPRINT</span>
+        </div>
+        <div id="stageViewer" class="relative aspect-[16/10] rounded-2xl overflow-hidden bg-obsidian-950 border border-white/5">
+          <div class="stage-layer" data-stage="0"></div>
+          <div class="stage-layer" data-stage="1"></div>
+          <div class="stage-layer" data-stage="2"></div>
+          <div class="scanline"></div>
+          <div class="absolute left-3 bottom-3 right-3 flex justify-between items-end pointer-events-none">
+            <div id="stageCaption" class="glass rounded-xl px-3 py-2 max-w-[70%]">
+              <div class="font-display text-sm font-semibold">Holographic CAD Blueprint</div>
+              <div class="text-xs text-slate-400 hidden sm:block">Every panel modelled and dimensioned before a single cut.</div>
+            </div>
+            <div class="glass rounded-lg px-2 py-1 font-mono text-[10px] text-slate-400">AUTO <span id="autoState" class="text-neon-cyan">ON</span></div>
+          </div>
+        </div>
+        <div class="px-2 pt-4 pb-1">
+          <input id="stageScrub" class="scrub" type="range" min="0" max="200" value="0" aria-label="Scrub blueprint to finished kitchen" />
+          <div role="tablist" class="mt-4 grid grid-cols-3 gap-2">
+            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="0" aria-selected="true">01 · Blueprint</button>
+            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="1" aria-selected="false">02 · 3D Build</button>
+            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="2" aria-selected="false">03 · Reality</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS STRIP -->
+<section class="relative py-20 border-y border-white/5 bg-obsidian-900/60">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 grid md:grid-cols-3 gap-6">
+    <div class="reveal glass rounded-2xl p-6">
+      <div class="font-mono text-xs text-neon-cyan">01 / DESIGN</div>
+      <h3 class="font-display text-xl mt-3">Laser-scanned & modelled</h3>
+      <p class="text-slate-400 mt-2 text-sm leading-relaxed">We LiDAR-scan your space, then model every carcass, hinge and LED channel in parametric CAD.</p>
+    </div>
+    <div class="reveal glass rounded-2xl p-6" style="transition-delay:.1s">
+      <div class="font-mono text-xs text-neon-cyan">02 / ENGINEER</div>
+      <h3 class="font-display text-xl mt-3">CNC-machined frames</h3>
+      <p class="text-slate-400 mt-2 text-sm leading-relaxed">Dark oak veneers and aerospace-grade aluminium are machined and dry-fitted in our atelier.</p>
+    </div>
+    <div class="reveal glass rounded-2xl p-6" style="transition-delay:.2s">
+      <div class="font-mono text-xs text-neon-cyan">03 / INSTALL</div>
+      <h3 class="font-display text-xl mt-3">White-glove install</h3>
+      <p class="text-slate-400 mt-2 text-sm leading-relaxed">Installed, commissioned and calibrated in days, with smart hardware paired to your home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="relative py-28 scroll-mt-20">
+  <div class="orb w-[400px] h-[400px] bg-violet-600 top-20 left-1/2 -translate-x-1/2 opacity-20"></div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="max-w-2xl reveal">
+      <div class="font-mono text-xs text-neon-cyan">SMART CABINETRY</div>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-3 tracking-tight">Engineered to disappear.<br/><span class="text-slate-500">Designed to be noticed.</span></h2>
+    </div>
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="featureGrid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="relative py-28 bg-obsidian-900/60 border-y border-white/5 scroll-mt-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal">
+      <div class="max-w-2xl">
+        <div class="font-mono text-xs text-neon-cyan">TRANSFORMATIONS</div>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-3 tracking-tight">From line-work to living space.</h2>
+        <p class="text-slate-400 mt-4">Drag across any project to reveal the finished build over its original blueprint.</p>
+      </div>
+      <div class="flex gap-2" id="galleryFilters">
+        <button class="filter btn-ghost rounded-full px-4 py-2 text-sm" data-f="all" aria-pressed="true">All</button>
+        <button class="filter btn-ghost rounded-full px-4 py-2 text-sm" data-f="kitchen" aria-pressed="false">Kitchen</button>
+        <button class="filter btn-ghost rounded-full px-4 py-2 text-sm" data-f="entry" aria-pressed="false">Entryway</button>
+      </div>
+    </div>
+    <div id="galleryGrid" class="mt-12 grid md:grid-cols-2 gap-6"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="relative py-28 overflow-hidden scroll-mt-20">
+  <div class="absolute inset-0 grid-bg opacity-60"></div>
+  <div class="orb w-[500px] h-[500px] bg-cyan-500 -bottom-60 -left-40 opacity-25"></div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-5 reveal">
+      <div class="font-mono text-xs text-neon-cyan">START A PROJECT</div>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-3 tracking-tight">Let's draft your space.</h2>
+      <p class="text-slate-400 mt-5 leading-relaxed">Tell us about your project. A design lead will reply within one business day with next steps and a consult slot.</p>
+      <ul class="mt-10 space-y-4 text-sm">
+        <li class="flex items-center gap-4 glass rounded-xl p-4"><span class="w-10 h-10 rounded-lg grid place-items-center bg-cyan-300/10 text-neon-cyan font-mono">01</span><span><span class="block font-medium">Free 3D concept</span><span class="text-slate-400">Included with every consult</span></span></li>
+        <li class="flex items-center gap-4 glass rounded-xl p-4"><span class="w-10 h-10 rounded-lg grid place-items-center bg-cyan-300/10 text-neon-cyan font-mono">02</span><span><span class="block font-medium">Fixed-price quote</span><span class="text-slate-400">No surprises after sign-off</span></span></li>
+        <li class="flex items-center gap-4 glass rounded-xl p-4"><span class="w-10 h-10 rounded-lg grid place-items-center bg-cyan-300/10 text-neon-cyan font-mono">03</span><span><span class="block font-medium">6–10 week delivery</span><span class="text-slate-400">From approved blueprint to install</span></span></li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-7 reveal">
+      <div class="glass rounded-3xl p-6 sm:p-10 relative">
+        <form id="contactForm" novalidate class="space-y-6">
+          <!-- spam honeypot -->
+          <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-xs font-mono text-slate-400 mb-2">NAME *</label>
+              <input id="name" name="name" required autocomplete="name" class="field w-full rounded-xl px-4 py-3.5" placeholder="Jordan Avery" />
+              <p class="err text-xs text-rose-400 mt-1.5 hidden">Please enter your name.</p>
+            </div>
+            <div>
+              <label for="email" class="block text-xs font-mono text-slate-400 mb-2">EMAIL *</label>
+              <input id="email" name="email" type="email" required autocomplete="email" class="field w-full rounded-xl px-4 py-3.5" placeholder="you@domain.com" />
+              <p class="err text-xs text-rose-400 mt-1.5 hidden">Please enter a valid email.</p>
+            </div>
+          </div>
+          <div>
+            <label for="phone" class="block text-xs font-mono text-slate-400 mb-2">PHONE</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" class="field w-full rounded-xl px-4 py-3.5" placeholder="(555) 010-2030" />
+            <p class="err text-xs text-rose-400 mt-1.5 hidden">Please enter a valid phone number.</p>
+          </div>
+          <fieldset>
+            <legend class="block text-xs font-mono text-slate-400 mb-2">PROJECT TYPE *</legend>
+            <div class="grid sm:grid-cols-3 gap-3">
+              <div class="ptype"><input class="sr-only" type="radio" name="project_type" id="pt1" value="Entryway Cabinets" required /><label for="pt1" class="block cursor-pointer rounded-xl border border-white/10 px-4 py-3.5 text-sm text-slate-300 transition hover:border-white/25">Entryway Cabinets</label></div>
+              <div class="ptype"><input class="sr-only" type="radio" name="project_type" id="pt2" value="Kitchen Suite" /><label for="pt2" class="block cursor-pointer rounded-xl border border-white/10 px-4 py-3.5 text-sm text-slate-300 transition hover:border-white/25">Kitchen Suite</label></div>
+              <div class="ptype"><input class="sr-only" type="radio" name="project_type" id="pt3" value="Custom Build" /><label for="pt3" class="block cursor-pointer rounded-xl border border-white/10 px-4 py-3.5 text-sm text-slate-300 transition hover:border-white/25">Custom Build</label></div>
+            </div>
+            <p class="err text-xs text-rose-400 mt-1.5 hidden">Please choose a project type.</p>
+          </fieldset>
+          <div>
+            <label for="message" class="block text-xs font-mono text-slate-400 mb-2">MESSAGE *</label>
+            <textarea id="message" name="message" rows="5" required class="field w-full rounded-xl px-4 py-3.5 resize-y" placeholder="Room dimensions, finishes you love, timeline…"></textarea>
+            <p class="err text-xs text-rose-400 mt-1.5 hidden">Tell us a little about your project (10+ characters).</p>
+          </div>
+
+          <div id="formError" class="hidden rounded-xl border border-rose-400/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert"></div>
+
+          <button id="submitBtn" type="submit" class="btn-neon w-full rounded-xl py-4 font-semibold inline-flex items-center justify-center gap-3">
+            <span class="label">Send Inquiry</span>
+            <span class="spinner hidden"></span>
+          </button>
+          <p class="text-xs text-slate-500 text-center">Your details are used only to respond to this inquiry.</p>
+        </form>
+
+        <!-- Success state -->
+        <div id="formSuccess" class="hidden text-center py-10" role="status" aria-live="polite">
+          <div class="mx-auto w-20 h-20 rounded-full grid place-items-center border border-cyan-300/50 bg-cyan-300/10 shadow-[0_0_60px_-10px_#22e6ff]">
+            <svg viewBox="0 0 24 24" class="w-9 h-9" fill="none" stroke="#22e6ff" stroke-width="2.2"><path class="draw" style="stroke-dasharray:40;stroke-dashoffset:40;animation-duration:.8s" d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          </div>
+          <h3 class="font-display text-3xl mt-6">Inquiry received.</h3>
+          <p class="text-slate-400 mt-3 max-w-sm mx-auto">Thanks, <span id="successName">there</span>. Our design team will be in touch within one business day.</p>
+          <button id="resetForm" class="btn-ghost rounded-xl px-5 py-3 mt-8 text-sm">Send another inquiry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-white/5 py-10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500">
+    <span>© <span id="yr"></span> Obsidian Atelier. Luxury custom cabinetry.</span>
+    <span class="font-mono text-xs">DESIGNED IN CAD · BUILT BY HAND</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
