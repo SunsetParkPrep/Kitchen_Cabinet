@@ -7,7 +7,7 @@
 <meta name="description" content="Futuristic luxury custom kitchen and entryway cabinetry. From blueprint to reality." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -57,6 +57,7 @@
   /* SVG animations */
   .draw { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 3.2s ease forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
+  .sketch { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s ease forwards; }
   .laser { stroke-dasharray: 6 8; animation: march 1.2s linear infinite; }
   @keyframes march { to { stroke-dashoffset: -28; } }
   .pulse { animation: pulse 2.4s ease-in-out infinite; }
@@ -85,7 +86,7 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
-    .draw { stroke-dashoffset: 0; }
+    .draw, .sketch { stroke-dashoffset: 0; }
   }
 </style>
 </head>
@@ -99,7 +100,7 @@
         <span class="relative grid place-items-center w-9 h-9 rounded-lg border border-cyan-300/40 bg-cyan-300/5">
           <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="#22e6ff" stroke-width="1.6"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><path d="M9 11v2M15 7h2M15 17h2"/></svg>
         </span>
-        <span class="font-display font-semibold tracking-wide">OBSIDIAN<span class="text-neon-cyan"> ATELIER</span></span>
+        <span class="font-display font-semibold tracking-wide">KAMO<span class="text-neon-cyan"> ABRAHIM</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
         <a href="#process" class="hover:text-white transition">Process</a>
@@ -145,7 +146,7 @@
       </div>
       <dl class="mt-12 grid grid-cols-3 gap-4 max-w-md">
         <div><dt class="text-xs text-slate-500 font-mono">TOLERANCE</dt><dd class="font-display text-2xl mt-1">±0.3<span class="text-sm text-slate-500">mm</span></dd></div>
-        <div><dt class="text-xs text-slate-500 font-mono">BUILDS</dt><dd class="font-display text-2xl mt-1" data-count="480">0</dd></div>
+        <div><dt class="text-xs text-slate-500 font-mono">BUILDS</dt><dd class="font-display text-2xl mt-1" data-count="5000">0</dd></div>
         <div><dt class="text-xs text-slate-500 font-mono">WARRANTY</dt><dd class="font-display text-2xl mt-1">25<span class="text-sm text-slate-500">yr</span></dd></div>
       </dl>
     </div>
@@ -158,7 +159,7 @@
             <span class="w-2 h-2 rounded-full bg-red-400/70"></span><span class="w-2 h-2 rounded-full bg-amber-300/70"></span><span class="w-2 h-2 rounded-full bg-emerald-400/70"></span>
             <span class="ml-2 hidden sm:inline">BLUEPRINT→REALITY // PROJECT_0427.dwg</span>
           </div>
-          <span id="stageReadout" class="font-mono text-[11px] text-neon-cyan">STAGE 01 · BLUEPRINT</span>
+          <span id="stageReadout" class="font-mono text-[11px] text-neon-cyan">STAGE 01 · DRAWING</span>
         </div>
         <div id="stageViewer" class="relative aspect-[16/10] rounded-2xl overflow-hidden bg-obsidian-950 border border-white/5">
           <div class="stage-layer" data-stage="0"></div>
@@ -167,8 +168,8 @@
           <div class="scanline"></div>
           <div class="absolute left-3 bottom-3 right-3 flex justify-between items-end pointer-events-none">
             <div id="stageCaption" class="glass rounded-xl px-3 py-2 max-w-[70%]">
-              <div class="font-display text-sm font-semibold">Holographic CAD Blueprint</div>
-              <div class="text-xs text-slate-400 hidden sm:block">Every panel modelled and dimensioned before a single cut.</div>
+              <div class="font-display text-sm font-semibold">Architectural Drawing</div>
+              <div class="text-xs text-slate-400 hidden sm:block">Hand-drafted in perspective and dimensioned to the millimetre.</div>
             </div>
             <div class="glass rounded-lg px-2 py-1 font-mono text-[10px] text-slate-400">AUTO <span id="autoState" class="text-neon-cyan">ON</span></div>
           </div>
@@ -176,9 +177,9 @@
         <div class="px-2 pt-4 pb-1">
           <input id="stageScrub" class="scrub" type="range" min="0" max="200" value="0" aria-label="Scrub blueprint to finished kitchen" />
           <div role="tablist" class="mt-4 grid grid-cols-3 gap-2">
-            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="0" aria-selected="true">01 · Blueprint</button>
-            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="1" aria-selected="false">02 · 3D Build</button>
-            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="2" aria-selected="false">03 · Reality</button>
+            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="0" aria-selected="true">01 · Drawing</button>
+            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="1" aria-selected="false">02 · Build</button>
+            <button role="tab" class="stage-tab rounded-xl py-2.5 text-xs sm:text-sm font-semibold btn-ghost transition" data-go="2" aria-selected="false">03 · Finished</button>
           </div>
         </div>
       </div>
@@ -319,7 +320,7 @@
 
 <footer class="border-t border-white/5 py-10">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500">
-    <span>© <span id="yr"></span> Obsidian Atelier. Luxury custom cabinetry.</span>
+    <span>© <span id="yr"></span> Kamo Abrahim. Fine woodworking &amp; custom cabinetry.</span>
     <span class="font-mono text-xs">DESIGNED IN CAD · BUILT BY HAND</span>
   </div>
 </footer>
