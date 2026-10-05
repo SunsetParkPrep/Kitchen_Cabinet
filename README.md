@@ -1,6 +1,18 @@
-# Obsidian Atelier — Luxury Custom Cabinetry
+# Kamo Abrahim — Fine Woodworking & Custom Cabinetry
 
-A single-page website for a luxury custom cabinet studio. It has a Blueprint → 3D Build → Reality hero slider, a smart-features grid, a before/after gallery and a contact form that emails inquiries.
+A single-page website for Kamo Abrahim's custom cabinetry. It has a photo hero, a **Collection** of real projects with a full-screen photo viewer, a drawing → build → finished process slider, a craft section and a contact form that emails inquiries.
+
+## Adding or changing project photos
+
+Photos live in `assets/work/` (full size, about 1800px) with matching thumbnails in `assets/work/sm/` (about 800px). Both folders use the same file names, for example `img_0059.jpg`.
+
+To add a project, put its photos in both folders, then add an entry to the `PROJECTS` list near the top of the collection code in `app.js`:
+
+```js
+{ id: 'new-kitchen', cat: 'kitchen', name: 'Project Name', meta: 'Short details', cover: '0100', photos: ['0100', '0101'] }
+```
+
+`cat` is `kitchen`, `builtin` or `theater`. Strip GPS/location data from phone photos before uploading them to a public site.
 
 It's plain HTML, Tailwind (CDN) and vanilla JavaScript, so there's no build step.
 
@@ -36,12 +48,9 @@ Inquiries go to **stockmarkettd@gmail.com**. The setting is `CONFIG` at the top 
   WEB3FORMS_ACCESS_KEY: 'your-key-here',
   ```
 
-## Adding generated images
+## Process slider images
 
-Save the Higgsfield renders into `assets/` with these names, then commit and push. The site uses them automatically in place of the built-in vector renders:
-
-- `stage-1-blueprint.jpg`, `stage-2-cgi-build.jpg`, `stage-3-reality.jpg`
-- `gallery-meridian.jpg`, `gallery-monolith.jpg`, `gallery-nocturne.jpg`, `gallery-matrix.jpg`
+The drawing and build stages are drawn in code, and the finished stage uses a real job photo. To swap any of them for a photo, set its path in `STAGE_IMAGES` at the top of `app.js`.
 
 ## Preview locally
 

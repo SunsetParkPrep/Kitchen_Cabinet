@@ -14,18 +14,19 @@ const CONFIG = {
   SUBJECT: 'New Cabinetry Inquiry — Kamo Abrahim'
 };
 
-/* ---------- Optional generated imagery ----------
-   Drop Higgsfield renders at these paths and they replace the vector renders automatically. */
+/* ---------- Process imagery ----------
+   Stages 1–2 are drawn in code; stage 3 is a real finished job from the collection.
+   Put a photo path in either of the first two slots to replace that drawing. */
 const STAGE_IMAGES = [
-  'assets/stage-1-blueprint.jpg',
-  'assets/stage-2-cgi-build.jpg',
-  'assets/stage-3-reality.jpg'
+  null,
+  null,
+  'assets/work/img_0230.jpg'
 ];
 
 const STAGES = [
-  { label: 'DRAWING', title: 'Architectural Drawing', text: 'Hand-drafted in perspective and dimensioned to the millimetre.' },
-  { label: 'ON-SITE BUILD', title: 'On-Site Build', text: 'Carcasses set to laser level, oak fronts going on.' },
-  { label: 'FINISHED', title: 'The Finished Space', text: 'Dark oak, honed quartz and concealed LED, installed.' }
+  { label: 'DRAWING', title: 'The Drawing', text: 'Every run, door and filler laid out and measured before a cut is made.' },
+  { label: 'BUILD', title: 'The Build', text: 'Boxes set level and plumb on site, doors and trim going on.' },
+  { label: 'FINISHED', title: 'The Finished Room', text: 'A completed two-tone walnut kitchen from our collection.' }
 ];
 
 /* ============================================================
@@ -115,56 +116,6 @@ const SCENES = {
       { p: [-285, 128, 500], text: 'U/C 1500 AFF' },
       { p: [20, 257, 500], text: '℄ HOOD' },
       { p: [-100, 108, 500], text: 'LVL ±0.0' }
-    ]
-  },
-  galley: {
-    label: 'GALLEY · VIEW B',
-    boxes: [
-      box({ x0: -300, x1: -190, y0: 10, y1: 270, z0: 440, z1: 500, toe: true, fronts: { face: 'front', rows: [{ f: .14, n: 1, t: 'flap' }, { f: .86, n: 1, t: 'door' }] } }),
-      box({ x0: -190, x1: 300, y0: 10, y1: 86, z0: 440, z1: 500, toe: true, fronts: { face: 'front', rows: [{ f: .3, n: 6, t: 'drawer' }, { f: .7, n: 6, t: 'door' }] } }),
-      box({ mat: 'quartz', x0: -190, x1: 300, y0: 86, y1: 92, z0: 436, z1: 500 }),
-      box({ x0: -190, x1: 300, y0: 160, y1: 240, z0: 465, z1: 500, led: true, fronts: { face: 'front', rows: [{ f: .5, n: 6, t: 'flap' }, { f: .5, n: 6, t: 'flap' }] } })
-    ],
-    backsplash: { x0: -190, x1: 300, y0: 92, y1: 160 },
-    cooktop: { x0: 10, x1: 80, z0: 450, z1: 488, y: 92 },
-    window: { z0: 170, z1: 400, y0: 85, y1: 235 },
-    dims: [{ a: [-190, 243, 500], b: [300, 243, 500], off: 14, label: '4900 QUARTZ RUN' }],
-    notes: [
-      { p: [-100, 210, 465], text: 'LIFT-UP FLAP UPPERS', dx: 20, dy: -70 },
-      { p: [150, 60, 440], text: 'TOE-KICK LED', dx: 40, dy: 50 }
-    ]
-  },
-  entry: {
-    label: 'FOYER · VIEW C',
-    boxes: [
-      box({ x0: -300, x1: -80, y0: 10, y1: 270, z0: 440, z1: 500, toe: true, fronts: { face: 'front', rows: [{ f: .15, n: 3, t: 'flap' }, { f: .85, n: 3, t: 'door' }] } }),
-      box({ mat: 'slat', x0: -80, x1: 140, y0: 52, y1: 200, z0: 494, z1: 500 }),
-      box({ x0: -80, x1: 140, y0: 200, y1: 270, z0: 462, z1: 500, led: true, fronts: { face: 'front', rows: [{ f: 1, n: 3, t: 'open' }] } }),
-      box({ x0: -80, x1: 140, y0: 18, y1: 46, z0: 450, z1: 500, float: true, fronts: { face: 'front', rows: [{ f: 1, n: 2, t: 'drawer' }] } }),
-      box({ mat: 'cushion', x0: -78, x1: 138, y0: 46, y1: 52, z0: 452, z1: 500 }),
-      box({ x0: 140, x1: 300, y0: 10, y1: 270, z0: 440, z1: 500, toe: true, fronts: { face: 'front', rows: [{ f: .15, n: 2, t: 'flap' }, { f: .85, n: 2, t: 'door' }] } })
-    ],
-    wash: { x0: -80, x1: 140, y0: 120, y1: 200 },
-    door: { z0: 170, z1: 280, y1: 215 },
-    dims: [{ a: [-300, 0, 440], b: [300, 0, 440], off: -16, label: '6000' }],
-    notes: [
-      { p: [30, 150, 494], text: 'OAK SLAT COAT WALL', dx: 50, dy: -150 },
-      { p: [-40, 35, 450], text: 'FLOATING BENCH + DRAWERS', dx: -110, dy: 28, anchor: 'end' }
-    ]
-  },
-  mudroom: {
-    label: 'MUDROOM · VIEW D',
-    boxes: [
-      box({ x0: -250, x1: 250, y0: 10, y1: 46, z0: 450, z1: 500, toe: true, fronts: { face: 'front', rows: [{ f: 1, n: 5, t: 'drawer' }] } }),
-      box({ mat: 'cushion', x0: -248, x1: 248, y0: 46, y1: 52, z0: 452, z1: 500 }),
-      box({ x0: -250, x1: 250, y0: 52, y1: 205, z0: 460, z1: 500, hooks: true, fronts: { face: 'front', rows: [{ f: 1, n: 5, t: 'open' }] } }),
-      box({ x0: -250, x1: 250, y0: 205, y1: 270, z0: 460, z1: 500, led: true, fronts: { face: 'front', rows: [{ f: 1, n: 5, t: 'flap' }] } })
-    ],
-    door: { z0: 170, z1: 280, y1: 215 },
-    dims: [{ a: [-250, 0, 450], b: [250, 0, 450], off: -16, label: '5000 · 5 BAYS' }],
-    notes: [
-      { p: [-150, 130, 460], text: 'OPEN LOCKER BAYS', dx: -20, dy: -150, anchor: 'end' },
-      { p: [100, 238, 460], text: 'CHARGING CUBBIES', dx: 70, dy: -40 }
     ]
   }
 };
@@ -496,7 +447,7 @@ function drawFinal(sc, id) {
   return o.join('');
 }
 
-/* Use a generated image if present, otherwise keep the vector render */
+/* Use a real photo if present, otherwise keep the vector render */
 function withImage(container, svgMarkup, src) {
   container.innerHTML = svgMarkup;
   if (!src) return;
@@ -507,9 +458,70 @@ function withImage(container, svgMarkup, src) {
 }
 
 /* ============================================================
-   Hero: Blueprint → Reality viewer
+   Collection data — photos live in assets/work (full size) and assets/work/sm (thumbnails)
    ============================================================ */
-(function heroViewer() {
+const PROJECTS = [
+  {
+    id: 'espresso', cat: 'kitchen', name: 'Espresso Estate Kitchen',
+    meta: 'Raised-panel doors · Arched hood · Built-in refrigerator surround',
+    cover: '0059', photos: ['0059', '0060', '0061', '0065', '0064', '0063', '0062', '0068', '0066', '0067', '0069']
+  },
+  {
+    id: 'walnut', cat: 'kitchen', name: 'Two-Tone Walnut Kitchen',
+    meta: 'Wood range hood · Furniture-style island · Painted built-ins',
+    cover: '0230', photos: ['0230', '0233', '0234', '0232', '0231']
+  },
+  {
+    id: 'white', cat: 'kitchen', name: 'Classic White Kitchen',
+    meta: 'Painted shaker · Granite peninsula · Built-in microwave island',
+    cover: '0289', photos: ['0289', '0288', '0287', '0259']
+  },
+  {
+    id: 'builtins', cat: 'builtin', name: 'Media Walls & Built-ins',
+    meta: 'Cherry mantel wall · Painted entertainment centre',
+    cover: '0258', photos: ['0258', '0184']
+  },
+  {
+    id: 'theater', cat: 'theater', name: 'Home Theater Paneling',
+    meta: 'Wainscot & lattice wall panels · Equipment cabinetry',
+    cover: '0227', photos: ['0227', '0228']
+  }
+];
+const CATS = { kitchen: 'Kitchen', builtin: 'Built-ins', theater: 'Home Theater' };
+const full = n => `assets/work/img_${n}.jpg`;
+const thumb = n => `assets/work/sm/img_${n}.jpg`;
+
+/* ============================================================
+   Hero slideshow
+   ============================================================ */
+(function heroSlides() {
+  const slides = [
+    { n: '0230', p: 'Two-Tone Walnut Kitchen', pos: '50% 55%' },
+    { n: '0059', p: 'Espresso Estate Kitchen', pos: '50% 48%' },
+    { n: '0288', p: 'Classic White Kitchen', pos: '50% 60%' },
+    { n: '0227', p: 'Home Theater Paneling', pos: '50% 60%' }
+  ];
+  const wrap = document.getElementById('heroSlides'), dots = document.getElementById('heroDots'), cap = document.getElementById('heroCaption');
+  wrap.innerHTML = slides.map((s, i) => `<img src="${full(s.n)}" alt="${s.p}" class="hero-slide${i === 0 ? ' on' : ''}" style="object-position:${s.pos}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}>`).join('');
+  dots.innerHTML = slides.map((s, i) => `<button class="hero-dot${i === 0 ? ' on' : ''}" aria-label="Show ${s.p}"></button>`).join('');
+  const imgs = [...wrap.children], btns = [...dots.children];
+  let cur = 0, timer;
+  const go = i => {
+    imgs[cur].classList.remove('on'); btns[cur].classList.remove('on');
+    cur = (i + slides.length) % slides.length;
+    imgs[cur].classList.add('on'); btns[cur].classList.add('on');
+    cap.textContent = slides[cur].p;
+  };
+  const start = () => { clearInterval(timer); if (!matchMedia('(prefers-reduced-motion: reduce)').matches) timer = setInterval(() => go(cur + 1), 6000); };
+  btns.forEach((b, i) => b.addEventListener('click', () => { go(i); start(); }));
+  cap.textContent = slides[0].p;
+  start();
+})();
+
+/* ============================================================
+   Process: drawing → build → finished
+   ============================================================ */
+(function processViewer() {
   const layers = [...document.querySelectorAll('#stageViewer .stage-layer')];
   const modes = ['blueprint', 'build', 'final'];
   layers.forEach((el, i) => withImage(el, renderScene('kitchen', modes[i]), STAGE_IMAGES[i]));
@@ -530,7 +542,7 @@ function withImage(container, svgMarkup, src) {
       current = idx;
       tabs.forEach((b, i) => b.setAttribute('aria-selected', String(i === idx)));
       readout.textContent = `STAGE 0${idx + 1} · ${STAGES[idx].label}`;
-      caption.innerHTML = `<div class="font-display text-sm font-semibold">${STAGES[idx].title}</div><div class="text-xs text-slate-400 hidden sm:block">${STAGES[idx].text}</div>`;
+      caption.innerHTML = `<div class="font-display text-lg leading-tight">${STAGES[idx].title}</div><div class="text-xs text-stone-400 hidden sm:block">${STAGES[idx].text}</div>`;
     }
   }
 
@@ -538,7 +550,7 @@ function withImage(container, svgMarkup, src) {
     cancelAnimationFrame(raf);
     const start = +scrub.value, delta = target - start, t0 = performance.now(), dur = 1100;
     const step = now => {
-      const k = Math.min(1, (now - t0) / dur);
+      const k = Math.max(0, Math.min(1, (now - t0) / dur));
       const e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
       scrub.value = start + delta * e; apply(+scrub.value);
       if (k < 1) raf = requestAnimationFrame(step);
@@ -552,101 +564,108 @@ function withImage(container, svgMarkup, src) {
 
   apply(0);
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    autoTimer = setInterval(() => { if (auto) animateTo(((current + 1) % 3) * 100); }, 4200);
+    autoTimer = setInterval(() => { if (auto) animateTo(((current + 1) % 3) * 100); }, 4500);
   }
 })();
 
 /* ============================================================
-   Features grid
+   Collection grid + lightbox
    ============================================================ */
-const FEATURES = [
-  { t: 'Touch-to-Open', d: 'Handle-less fronts with servo-assisted push latches. One fingertip, whisper-silent opening.', icon: '<rect x="10" y="6" width="28" height="36" rx="2"/><circle cx="31" cy="24" r="3" class="pulse" fill="#22e6ff"/><circle cx="31" cy="24" r="8" stroke-opacity=".4"/>' },
-  { t: 'Concealed LED Channels', d: 'Milled aluminium channels hide 2700–6500K tunable strips under every shelf and toe-kick.', icon: '<rect x="6" y="12" width="36" height="8" rx="1"/><path d="M8 24h32" stroke-width="3" class="pulse"/><path d="M12 30l-3 8M24 30v9M36 30l3 8" stroke-opacity=".5"/>' },
-  { t: 'Modular Entry Storage', d: 'Reconfigurable lockers, bench drawers and charging cubbies sized to your family’s daily flow.', icon: '<rect x="6" y="6" width="16" height="36" rx="1"/><rect x="26" y="6" width="16" height="16" rx="1"/><rect x="26" y="26" width="16" height="16" rx="1"/><path d="M18 22v4"/>' },
-  { t: 'Titanium Soft-Close', d: 'Aerospace-grade hinges and runners rated to 100,000 cycles with adjustable damping.', icon: '<circle cx="24" cy="24" r="14"/><path d="M24 10v14l9 6"/><circle cx="24" cy="24" r="2" fill="#22e6ff"/>' },
-  { t: 'App-Linked Scenes', d: 'Pair lighting and lift mechanisms with HomeKit, Google Home or Control4 for scenes on cue.', icon: '<rect x="14" y="4" width="20" height="40" rx="4"/><path d="M20 36h8"/><path d="M19 16a7 7 0 0 1 10 0M21 20a3.5 3.5 0 0 1 6 0" class="pulse"/>' },
-  { t: 'Engineered Quartz & Oak', d: 'Book-matched dark oak veneers paired with honed, stain-proof quartz in 40+ finishes.', icon: '<path d="M6 34l18-10 18 10-18 10z"/><path d="M6 26l18-10 18 10" stroke-opacity=".6"/><path d="M6 18l18-10 18 10" stroke-opacity=".3"/>' }
-];
-(function features() {
-  const grid = document.getElementById('featureGrid');
-  grid.innerHTML = FEATURES.map((f, i) => `
-    <article class="feature reveal glass rounded-2xl p-7 relative overflow-hidden" style="transition-delay:${i * 0.07}s">
-      <div class="halo absolute inset-0 pointer-events-none"></div>
-      <div class="relative">
-        <div class="w-14 h-14 rounded-xl grid place-items-center bg-cyan-300/[.07] border border-cyan-300/20">
-          <svg viewBox="0 0 48 48" class="w-8 h-8" fill="none" stroke="#22e6ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${f.icon}</svg>
-        </div>
-        <h3 class="font-display text-xl font-semibold mt-6">${f.t}</h3>
-        <p class="text-slate-400 text-sm mt-2 leading-relaxed">${f.d}</p>
-        <div class="mt-6 font-mono text-[10px] text-slate-500">SPEC · 0${i + 1}</div>
+(function collection() {
+  const grid = document.getElementById('collectionGrid');
+  grid.innerHTML = PROJECTS.map((p, i) => `
+    <button class="project reveal group relative overflow-hidden rounded-2xl text-left ${i === 0 ? 'lg:col-span-2 lg:row-span-2' : ''}" data-cat="${p.cat}" data-project="${p.id}" aria-label="Open ${p.name} photos">
+      <img src="${i === 0 ? full(p.cover) : thumb(p.cover)}" alt="${p.name}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition duration-[1.2s] ease-out group-hover:scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+      <div class="absolute left-0 right-0 bottom-0 p-5 sm:p-6">
+        <div class="text-[11px] tracking-[.2em] uppercase text-gold">${CATS[p.cat]} · ${p.photos.length} photo${p.photos.length > 1 ? 's' : ''}</div>
+        <h3 class="font-display text-2xl ${i === 0 ? 'sm:text-4xl' : 'sm:text-3xl'} mt-1 text-cream">${p.name}</h3>
+        <p class="text-sm text-stone-300/80 mt-1 ${i === 0 ? '' : 'hidden sm:block'}">${p.meta}</p>
       </div>
-    </article>`).join('');
-  grid.querySelectorAll('.feature').forEach(card => card.addEventListener('pointermove', e => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      <span class="absolute top-4 right-4 rounded-full border border-white/25 bg-black/30 backdrop-blur px-3 py-1 text-xs text-cream opacity-0 group-hover:opacity-100 transition">View project →</span>
+    </button>`).join('') + `
+    <a href="#contact" class="reveal relative overflow-hidden rounded-2xl border border-gold/30 bg-ink-800 p-6 flex flex-col justify-between group">
+      <div class="text-[11px] tracking-[.2em] uppercase text-gold">Your space</div>
+      <div>
+        <h3 class="font-display text-3xl text-cream leading-tight">Your project<br><em class="text-gold">could be next.</em></h3>
+        <span class="inline-flex items-center gap-2 mt-4 text-sm text-stone-300 group-hover:text-cream transition">Request a quote <span aria-hidden="true">→</span></span>
+      </div>
+    </a>`;
+
+  // filters
+  const filters = [...document.querySelectorAll('#collectionFilters .filter')];
+  filters.forEach(b => b.addEventListener('click', () => {
+    filters.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    grid.querySelectorAll('.project').forEach(card => {
+      const show = b.dataset.f === 'all' || card.dataset.cat === b.dataset.f;
+      card.style.display = show ? '' : 'none';
+      card.classList.toggle('lg:col-span-2', show && b.dataset.f === 'all' && card === grid.firstElementChild);
+      card.classList.toggle('lg:row-span-2', show && b.dataset.f === 'all' && card === grid.firstElementChild);
+    });
   }));
+
+  // lightbox
+  const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbTitle = document.getElementById('lbTitle'),
+        lbCount = document.getElementById('lbCount'), lbThumbs = document.getElementById('lbThumbs');
+  let proj = null, idx = 0, lastFocus = null;
+  const show = i => {
+    idx = (i + proj.photos.length) % proj.photos.length;
+    lbImg.classList.add('opacity-0');
+    const n = proj.photos[idx], pre = new Image();
+    pre.onload = () => { lbImg.src = pre.src; lbImg.alt = `${proj.name}, photo ${idx + 1}`; lbImg.classList.remove('opacity-0'); };
+    pre.src = full(n);
+    lbCount.textContent = `${idx + 1} / ${proj.photos.length}`;
+    [...lbThumbs.children].forEach((t, j) => t.classList.toggle('on', j === idx));
+    lbThumbs.children[idx]?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+  };
+  const open = id => {
+    proj = PROJECTS.find(p => p.id === id);
+    lastFocus = document.activeElement;
+    lbTitle.textContent = proj.name;
+    lbThumbs.innerHTML = proj.photos.map((n, j) => `<button class="lb-thumb" aria-label="Photo ${j + 1}"><img src="${thumb(n)}" alt="" loading="lazy"></button>`).join('');
+    [...lbThumbs.children].forEach((t, j) => t.addEventListener('click', () => show(j)));
+    lb.classList.remove('hidden'); document.body.style.overflow = 'hidden';
+    show(0);
+    document.getElementById('lbClose').focus();
+  };
+  const close = () => { lb.classList.add('hidden'); document.body.style.overflow = ''; lastFocus?.focus(); };
+  grid.querySelectorAll('.project').forEach(c => c.addEventListener('click', () => open(c.dataset.project)));
+  document.getElementById('lbPrev').addEventListener('click', () => show(idx - 1));
+  document.getElementById('lbNext').addEventListener('click', () => show(idx + 1));
+  document.getElementById('lbClose').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.id === 'lbStage') close(); });
+  document.addEventListener('keydown', e => {
+    if (lb.classList.contains('hidden')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+  let sx = null;
+  lbImg.addEventListener('pointerdown', e => { sx = e.clientX; });
+  lbImg.addEventListener('pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 40) show(idx + (e.clientX < sx ? 1 : -1)); sx = null; });
 })();
 
 /* ============================================================
-   Gallery: before/after compare cards
+   Craft grid
    ============================================================ */
-const PROJECTS = [
-  { id: 'meridian', cat: 'kitchen', layout: 'kitchen', name: 'The Meridian Kitchen', meta: 'Dark oak · Calacatta quartz · 3 weeks install' },
-  { id: 'monolith', cat: 'entry', layout: 'entry', name: 'Foyer Monolith', meta: 'Smoked oak · Bench storage · Coat wall' },
-  { id: 'nocturne', cat: 'kitchen', layout: 'galley', name: 'Nocturne Suite', meta: 'Lift-up flaps · 6m quartz run · Toe-kick LED' },
-  { id: 'matrix', cat: 'entry', layout: 'mudroom', name: 'Mudroom Matrix', meta: '5-bay lockers · Charging cubbies · Drawers' }
+const FEATURES = [
+  { t: 'Raised & Shaker Doors', d: 'Raised-panel, recessed shaker and glass-front doors, built to suit traditional and transitional homes.', icon: '<rect x="9" y="5" width="30" height="38" rx="1"/><rect x="14" y="10" width="20" height="28" rx="1"/><path d="M17 13h14v22H17z" stroke-opacity=".45"/>' },
+  { t: 'Stain & Paint Finishes', d: 'Deep espresso and walnut stains to crisp painted whites and soft sage, sprayed and hand-finished.', icon: '<path d="M10 30c0-9 6-14 14-22 8 8 14 13 14 22a14 14 0 0 1-28 0z"/><path d="M18 32a6 6 0 0 0 6 6" stroke-opacity=".5"/>' },
+  { t: 'Appliance Integration', d: 'Built-in surrounds for refrigerators, ranges, hoods and wall ovens, so every appliance sits flush.', icon: '<rect x="8" y="6" width="32" height="36" rx="1"/><rect x="13" y="11" width="10" height="26"/><rect x="25" y="11" width="10" height="26"/><path d="M21 20v8M27 20v8" stroke-opacity=".6"/>' },
+  { t: 'Islands & Peninsulas', d: 'Furniture-style islands with turned legs, seating overhangs and storage on every side.', icon: '<path d="M5 18h38"/><rect x="8" y="18" width="32" height="18"/><path d="M8 36v6M40 36v6M24 18v18" stroke-opacity=".6"/>' },
+  { t: 'Crown & Millwork', d: 'Crown moulding, arched hoods, light rails and trim details that finish a room properly.', icon: '<path d="M4 10h40M6 14h36M9 18h30"/><path d="M14 18c0 8 4 12 10 12s10-4 10-12" stroke-opacity=".6"/><path d="M14 30v12M34 30v12"/>' },
+  { t: 'Built-ins & Theaters', d: 'Media walls, mantels, entertainment centres and home-theater paneling, made to measure.', icon: '<rect x="5" y="8" width="38" height="32" rx="1"/><rect x="14" y="13" width="20" height="13"/><path d="M5 31h38M14 31v9M34 31v9" stroke-opacity=".6"/>' }
 ];
-(function gallery() {
-  const grid = document.getElementById('galleryGrid');
-  grid.innerHTML = PROJECTS.map(p => `
-    <figure class="reveal glass rounded-3xl p-3 group" data-cat="${p.cat}">
-      <div class="compare aspect-[16/10] rounded-2xl overflow-hidden" style="--split:50%" tabindex="0" role="slider" aria-label="Reveal finished ${p.name}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-        <div class="before absolute inset-0" data-layout="${p.layout}" data-mode="blueprint"></div>
-        <div class="after" data-layout="${p.layout}" data-mode="final" data-img="assets/gallery-${p.id}.jpg"></div>
-        <div class="handle"></div>
-        <span class="absolute top-3 left-3 glass rounded-md px-2 py-1 font-mono text-[10px] text-cyan-200">BLUEPRINT</span>
-        <span class="absolute top-3 right-3 glass rounded-md px-2 py-1 font-mono text-[10px] text-white">FINISHED</span>
+(function craft() {
+  const grid = document.getElementById('featureGrid');
+  grid.innerHTML = FEATURES.map((f, i) => `
+    <article class="feature reveal rounded-2xl p-7 relative overflow-hidden border border-white/[.07] bg-white/[.02]" style="transition-delay:${i * 0.06}s">
+      <div class="w-14 h-14 rounded-full grid place-items-center border border-gold/40">
+        <svg viewBox="0 0 48 48" class="w-7 h-7" fill="none" stroke="#c9a46a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${f.icon}</svg>
       </div>
-      <figcaption class="flex items-center justify-between px-3 pt-4 pb-2">
-        <div><div class="font-display text-lg font-semibold">${p.name}</div><div class="text-xs text-slate-400 mt-0.5">${p.meta}</div></div>
-        <span class="font-mono text-[10px] text-neon-cyan uppercase">${p.cat}</span>
-      </figcaption>
-    </figure>`).join('');
-
-  grid.querySelectorAll('[data-layout]').forEach(el => {
-    el.firstChild || withImage(el, renderScene(el.dataset.layout, el.dataset.mode), el.dataset.img);
-  });
-
-  grid.querySelectorAll('.compare').forEach(c => {
-    let dragging = false;
-    const set = pct => {
-      pct = Math.max(0, Math.min(100, pct));
-      c.style.setProperty('--split', pct + '%');
-      c.setAttribute('aria-valuenow', Math.round(pct));
-    };
-    const fromEvent = e => { const r = c.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); };
-    c.addEventListener('pointerdown', e => { dragging = true; c.setPointerCapture(e.pointerId); fromEvent(e); });
-    c.addEventListener('pointermove', e => { if (dragging || e.pointerType === 'mouse') fromEvent(e); });
-    c.addEventListener('pointerup', () => { dragging = false; });
-    c.addEventListener('keydown', e => {
-      const v = parseFloat(c.style.getPropertyValue('--split')) || 50;
-      if (e.key === 'ArrowLeft') { set(v - 5); e.preventDefault(); }
-      if (e.key === 'ArrowRight') { set(v + 5); e.preventDefault(); }
-    });
-  });
-
-  const filters = [...document.querySelectorAll('#galleryFilters .filter')];
-  const paint = () => filters.forEach(b => {
-    const on = b.getAttribute('aria-pressed') === 'true';
-    b.classList.toggle('bg-cyan-300/10', on); b.classList.toggle('border-cyan-300/60', on); b.classList.toggle('text-white', on);
-  });
-  filters.forEach(b => b.addEventListener('click', () => {
-    filters.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    paint();
-    grid.querySelectorAll('figure').forEach(f => { f.style.display = b.dataset.f === 'all' || f.dataset.cat === b.dataset.f ? '' : 'none'; });
-  }));
-  paint();
+      <h3 class="font-display text-2xl mt-6 text-cream">${f.t}</h3>
+      <p class="text-stone-400 text-sm mt-2 leading-relaxed">${f.d}</p>
+    </article>`).join('');
 })();
 
 /* ============================================================
@@ -688,7 +707,7 @@ const PROJECTS = [
   function setLoading(on) {
     btn.disabled = on;
     btn.classList.toggle('opacity-70', on);
-    btn.querySelector('.label').textContent = on ? 'Transmitting…' : 'Send Inquiry';
+    btn.querySelector('.label').textContent = on ? 'Sending…' : 'Send Inquiry';
     btn.querySelector('.spinner').classList.toggle('hidden', !on);
   }
 
@@ -729,7 +748,7 @@ const PROJECTS = [
       form.classList.add('hidden');
       success.classList.remove('hidden');
     } catch (err) {
-      errBox.innerHTML = `<strong>Transmission failed.</strong> ${navigator.onLine ? 'Our mail relay didn\'t accept the request' : 'You appear to be offline'} — please try again, or email us directly at <a class="underline" href="mailto:${CONFIG.RECIPIENT}">${CONFIG.RECIPIENT}</a>.`;
+      errBox.innerHTML = `<strong>Your message didn't send.</strong> ${navigator.onLine ? 'The mail service didn\'t accept the request' : 'You appear to be offline'} — please try again, or email us directly at <a class="underline" href="mailto:${CONFIG.RECIPIENT}">${CONFIG.RECIPIENT}</a>.`;
       errBox.classList.remove('hidden');
       console.error('[contact]', err);
     } finally {
@@ -749,6 +768,9 @@ const PROJECTS = [
    ============================================================ */
 (function chrome() {
   document.getElementById('yr').textContent = new Date().getFullYear();
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
   const menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
   menuBtn.addEventListener('click', () => { const open = menu.classList.toggle('hidden') === false; menuBtn.setAttribute('aria-expanded', String(open)); });
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
